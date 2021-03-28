@@ -6,6 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  cache: {
+    type: 'memory',
+  },
   entry: '/src/script.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -21,9 +24,9 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{from: './src/static', to: 'static'}],
+      patterns: [{ from: './src/static', to: 'static' }],
     }),
-    new HtmlWebpackPlugin({template: './src/index.html', inject: 'body'}),
+    new HtmlWebpackPlugin({ template: './src/index.html', inject: 'body' }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
   ],
@@ -51,5 +54,8 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
+  },
+  optimization: {
+    minimize: false,
   },
 };
